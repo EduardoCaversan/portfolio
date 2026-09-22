@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /portfolio/
+Sitemap: https://eduardocaversan.github.io/portfolio/sitemap.xml
