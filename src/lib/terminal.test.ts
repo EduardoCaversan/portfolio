@@ -17,9 +17,12 @@ describe('terminal parser', () => {
   ])('accepts %s and normalizes whitespace/case', (command) => {
     expect(parseCommand(`  ${command.toUpperCase()}  `)).toEqual({ command })
   })
-  it.each(['dotnet', 'go', 'cloud', 'mobile', 'python'])('parses explicit stack %s', (stack) => {
-    expect(parseCommand(`projects   --stack ${stack}`)).toEqual({ command: 'projects', stack })
-  })
+  it.each(['dotnet', 'node', 'go', 'cloud', 'mobile', 'python'])(
+    'parses explicit stack %s',
+    (stack) => {
+      expect(parseCommand(`projects   --stack ${stack}`)).toEqual({ command: 'projects', stack })
+    },
+  )
   it.each([
     'projects --stack',
     'projects --stack unknown',
@@ -44,14 +47,15 @@ describe('project filters and terminal output', () => {
     expect(filterProjects(projects, 'dotnet').map((p) => p.id)).toEqual(['bankapp', 'dotnet-easy']))
   it('returns Go projects across categories', () =>
     expect(filterProjects(projects, 'go').map((p) => p.id)).toEqual(['mini-k6', 'lead-scraper']))
-  it('returns cloud labs and keeps the original collection intact', () => {
-    expect(filterProjects(projects, 'cloud').map((p) => p.id)).toEqual(['voip', 'cloud-labs'])
+  it('returns the infrastructure lab and keeps the curated collection intact', () => {
+    expect(filterProjects(projects, 'cloud').map((p) => p.id)).toEqual(['voip'])
     expect(filterProjects(projects, 'all')).toHaveLength(8)
   })
-  it('uses the completed TaskFlow branch in output', () =>
+  it('exposes selected repositories in terminal output', () =>
     expect(executeCommand('projects', 'pt').links).toContainEqual({
-      label: 'TaskFlow / entrega-3',
-      url: 'https://github.com/EduardoCaversan/TaskFlow/tree/entrega-3',
+      label: 'GitHub',
+      url: 'https://github.com/EduardoCaversan/incident-hub',
+      kind: 'repository',
     }))
   it('returns localized content and honest role', () => {
     expect(executeCommand('whoami', 'en').text).toContain('Software Engineer Pleno · SustainOps')

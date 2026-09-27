@@ -13,6 +13,10 @@ interface Content {
   contact: string
   viewCode: string
   technical: string
+  architecture: string
+  problem: string
+  engineering: string
+  result: string
   close: string
   copy: string
   copied: string
@@ -37,8 +41,8 @@ interface Content {
   all: string
   infraTitle: string
   infraIntro: string
-  experimentsTitle: string
-  experimentsIntro: string
+  secondaryTitle: string
+  secondaryIntro: string
   stackTitle: string
   stackIntro: string
   educationTitle: string
@@ -65,7 +69,7 @@ export const content: Record<Locale, Content> = {
       overview: 'Visão geral',
       experience: 'Experiência',
       projects: 'Projetos',
-      infrastructure: 'Infraestrutura',
+      infrastructure: 'Laboratório',
       stack: 'Stack',
       education: 'Formação',
       contact: 'Contato',
@@ -78,8 +82,12 @@ export const content: Record<Locale, Content> = {
     empty: 'Nenhum resultado.',
     explore: 'Explorar projetos',
     contact: 'Entrar em contato',
-    viewCode: 'Ver código',
+    viewCode: 'Ver repositório',
     technical: 'Detalhes de engenharia',
+    architecture: 'Ver arquitetura',
+    problem: 'Problema',
+    engineering: 'Engenharia',
+    result: 'Resultado',
     close: 'Fechar',
     copy: 'Copiar e-mail',
     copied: 'E-mail copiado.',
@@ -111,12 +119,12 @@ export const content: Record<Locale, Content> = {
     projectsIntro:
       'Uma seleção de projetos que traduzem diferentes formas de pensar e construir software.',
     all: 'Todos',
-    infraTitle: 'Além da aplicação.',
+    infraTitle: 'Mais projetos de engenharia.',
     infraIntro:
-      'Laboratórios de infraestrutura, automação e entrega. Ambientes de estudo, com escopo explícito.',
-    experimentsTitle: 'Espaço para experimentar.',
-    experimentsIntro:
-      'Estudos de automação e concorrência. Ideias em exploração, com limites claros.',
+      'Ferramentas e experimentos selecionados: úteis para explorar uma ideia, sem competir com os sistemas principais.',
+    secondaryTitle: 'Ferramentas e experimentos com escopo claro.',
+    secondaryIntro:
+      'Projetos menores que mostram automação e concorrência, apresentados sem transformar a página em uma lista de repositórios.',
     stackTitle: 'Ferramentas com propósito.',
     stackIntro:
       'Backend e produção no centro. As demais competências conectam o ciclo de desenvolvimento.',
@@ -131,7 +139,7 @@ export const content: Record<Locale, Content> = {
       'Explore este perfil por comandos. Digite help para começar. Nenhum comando do sistema é executado.',
     terminalInput: 'Digite um comando',
     terminalUnknown: 'Comando não encontrado. Digite help.',
-    terminalInvalid: 'Use projects --stack dotnet, go, cloud, mobile ou python.',
+    terminalInvalid: 'Use projects --stack dotnet, node, go, cloud, mobile ou python.',
     boot: 'INICIALIZANDO PERFIL DE ENGENHARIA',
     bootSteps: [
       'Carregando experiência',
@@ -149,7 +157,7 @@ export const content: Record<Locale, Content> = {
       overview: 'Overview',
       experience: 'Experience',
       projects: 'Projects',
-      infrastructure: 'Infrastructure',
+      infrastructure: 'Engineering lab',
       stack: 'Stack',
       education: 'Education',
       contact: 'Contact',
@@ -162,8 +170,12 @@ export const content: Record<Locale, Content> = {
     empty: 'No results.',
     explore: 'Explore projects',
     contact: 'Get in touch',
-    viewCode: 'View code',
+    viewCode: 'View repository',
     technical: 'Engineering details',
+    architecture: 'View architecture',
+    problem: 'Problem',
+    engineering: 'Engineering',
+    result: 'Result',
     close: 'Close',
     copy: 'Copy email',
     copied: 'Email copied.',
@@ -195,12 +207,12 @@ export const content: Record<Locale, Content> = {
     projectsIntro:
       'Selected projects that reflect different ways of thinking about and building software.',
     all: 'All',
-    infraTitle: 'Beyond the application.',
+    infraTitle: 'More engineering projects.',
     infraIntro:
-      'Labs in infrastructure, automation and delivery. Learning environments with an explicit scope.',
-    experimentsTitle: 'Room to experiment.',
-    experimentsIntro:
-      'Studies in automation and concurrency. Ideas under exploration, with clear boundaries.',
+      'Selected tools and experiments: useful for exploring an idea without competing with the main systems.',
+    secondaryTitle: 'Tools and experiments with a clear scope.',
+    secondaryIntro:
+      'Smaller projects that show automation and concurrency without turning this page into a repository dump.',
     stackTitle: 'Tools with a purpose.',
     stackIntro:
       'Backend and production at the center. Supporting skills connect the development cycle.',
@@ -215,7 +227,7 @@ export const content: Record<Locale, Content> = {
       'Explore this profile using commands. Type help to start. No system commands are executed.',
     terminalInput: 'Enter a command',
     terminalUnknown: 'Command not found. Type help.',
-    terminalInvalid: 'Use projects --stack dotnet, go, cloud, mobile or python.',
+    terminalInvalid: 'Use projects --stack dotnet, node, go, cloud, mobile or python.',
     boot: 'INITIALIZING ENGINEERING PROFILE',
     bootSteps: [
       'Loading experience',

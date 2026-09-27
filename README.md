@@ -68,7 +68,7 @@ docs/               Capturas reais e relatório de validação
 
 Edite `src/data` para atualizar o perfil e os projetos. Todos os textos principais possuem versões explícitas em português e inglês; não há tradução automática. O cargo público é `Software Engineer Pleno` e a área é `SustainOps`, inclusive no idioma inglês. A promoção na Celcoin foi em março de 2026.
 
-Cada projeto declara categoria, status honesto (`Project`, `Lab`, `Experiment`), descrição curta e técnica, tecnologias, links e fluxo quando útil. **TaskFlow aponta para `entrega-3`**, pois a branch padrão é uma entrega parcial. Os dois repositórios Terraform/Asterisk formam um único case. Projetos excluídos e o currículo antigo não são publicados.
+Cada projeto declara categoria, status honesto (`Project`, `Lab`, `Experiment`, `Tool`), descrição curta e técnica, tecnologias, links e fluxo quando útil. A seleção principal reúne IncidentHub, Ekklesia, Entre, BankApp, Mini K6 e o case Terraform/Asterisk; ferramentas menores ficam no laboratório de engenharia. Os detalhes expandíveis incluem contexto de problema, engenharia, resultado e arquitetura somente quando ela é representativa do repositório. Projetos acadêmicos e experimentos que não sustentam a posição principal não são publicados como destaque.
 
 Tokens visuais e temas estão no início de `src/styles.css`. Ao alterar domínio/base path, atualize também `vite.config.ts`, `index.html`, `public/sitemap.xml`, `public/robots.txt` e `profile.url`. Regenere a imagem social com `npm run assets:social` (Chromium instalado). Para Lighthouse, inicie `npm run preview -- --port 4174` e execute `npm run audit`.
 
