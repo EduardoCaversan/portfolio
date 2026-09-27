@@ -32,7 +32,7 @@ Build de produção em Chromium headless, URL local `http://127.0.0.1:4174/portf
 ## Cobertura de comportamento
 
 - Parser: comandos válidos, normalização, argumentos inválidos, filtros e entrada arbitrária sem execução.
-- Filtros .NET, Go e cloud; TaskFlow preserva o link da branch `entrega-3`.
+- Filtros .NET, Node.js, Go e cloud; links de repositório e demonstração são validados na seleção curada.
 - Preferências: PT-BR/escuro/Recruiter como padrão, persistência e recuperação de storage inválido ou bloqueado.
 - Perfil: cargo, SustainOps, Celcoin, promoção, projetos, laboratórios e formação.
 - Idioma EN, tema claro e modo Engineer sobrevivem à atualização; detalhes técnicos se expandem.
@@ -51,7 +51,7 @@ Capturas reais de página completa e viewport estão em [screenshots](screenshot
 
 Conteúdo revisado nos dois idiomas. Eduardo é apresentado como **Software Engineer Pleno · SustainOps**. A promoção foi registrada como evolução de Júnior a Pleno em aproximadamente seis meses, em março de 2026. Não foram incluídos cargos alternativos, currículo antigo, identificador acadêmico, informações confidenciais, dados pessoais sensíveis ou métricas de impacto inventadas.
 
-BankApp, .NET Easy, Mini K6 e TaskFlow têm destaque. Terraform/Asterisk formam um único laboratório; Cloud & Deployment Labs aparece separadamente. Os dois experimentos de automação/scraping estão identificados como estudos, com limites e uso responsável. Não há execução de infraestrutura nem serviços externos no portfólio.
+IncidentHub, Ekklesia, Entre, BankApp, Mini K6 e Terraform/Asterisk têm destaque. .NET Easy e o experimento de scraping ficam na camada secundária, com escopo explícito. Não há execução de infraestrutura nem serviços externos no portfólio.
 
 ## Deploy e limites
 

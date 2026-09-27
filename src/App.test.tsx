@@ -5,18 +5,22 @@ import App from './App'
 import { preferenceKey } from './lib/preferences'
 
 describe('professional profile', () => {
-  it('renders the correct role, career, projects, labs and education without excluded content', () => {
+  it('renders the correct role, career, curated projects, engineering lab and education', () => {
     render(<App />)
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Software bem construído.')
     expect(screen.getByText('Software Engineer Pleno — SustainOps')).toBeVisible()
     expect(screen.getByRole('heading', { name: 'Celcoin' })).toBeVisible()
     expect(screen.getByText(/março de 2026/)).toBeVisible()
-    expect(screen.getByRole('link', { name: 'Ver código: TaskFlow / entrega-3' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'Ver repositório: IncidentHub' })).toHaveAttribute(
       'href',
-      'https://github.com/EduardoCaversan/TaskFlow/tree/entrega-3',
+      'https://github.com/EduardoCaversan/incident-hub',
     )
-    expect(screen.getByRole('heading', { name: /Cloud & Deployment Labs/ })).toBeVisible()
-    expect(screen.getByRole('heading', { name: /Infrastructure-as-Code VoIP Lab/ })).toBeVisible()
+    expect(screen.getByRole('link', { name: 'Open Ekklesia: Ekklesia' })).toHaveAttribute(
+      'href',
+      'https://eduardocaversan.github.io/ekklesia/',
+    )
+    expect(screen.getByRole('heading', { name: /VoIP Infrastructure Lab/ })).toBeVisible()
+    expect(screen.getByRole('heading', { name: /\.NET Easy/ })).toBeVisible()
     expect(screen.getByText(/Universidade Tecnológica/)).toBeVisible()
     expect(document.body.textContent).not.toMatch(
       /MyFinance|Educa\+|SRE|CRE|Platform Engineer|DevOps Engineer/,
@@ -43,18 +47,20 @@ describe('professional profile', () => {
       theme: 'light',
       mode: 'engineer',
     })
-    expect([...document.querySelectorAll('details')].every((el) => el.open)).toBe(true)
+    expect(
+      [...document.querySelectorAll('.technical-details')].every((el) => el.hasAttribute('open')),
+    ).toBe(true)
     await user.click(screen.getByRole('button', { name: 'Recruiter' }))
     expect(screen.getByRole('heading', { name: 'Celcoin' })).toBeVisible()
-    expect(screen.getByRole('heading', { name: /BankApp/ })).toBeVisible()
+    expect(screen.getByRole('heading', { name: /IncidentHub/ })).toBeVisible()
   })
-  it('filters featured projects without removing infrastructure and experiments', async () => {
+  it('filters featured projects without removing the engineering lab', async () => {
     const user = userEvent.setup()
     render(<App />)
     const section = document.getElementById('projects')!
     await user.click(within(section).getByRole('button', { name: 'Go' }))
     expect(within(section).getByRole('heading', { name: /Mini K6/ })).toBeVisible()
-    expect(within(section).queryByRole('heading', { name: /BankApp/ })).toBeNull()
-    expect(screen.getByRole('heading', { name: /Cloud & Deployment Labs/ })).toBeVisible()
+    expect(within(section).queryByRole('heading', { name: /IncidentHub/ })).toBeNull()
+    expect(screen.getByRole('heading', { name: /\.NET Easy/ })).toBeVisible()
   })
 })

@@ -9,6 +9,7 @@ export const commands = [
   'experience',
   'projects',
   'projects --stack dotnet',
+  'projects --stack node',
   'projects --stack go',
   'projects --stack cloud',
   'skills',
@@ -31,7 +32,7 @@ type Command =
   | 'clear'
 export type ParsedCommand =
   { command: Command; stack?: StackFilter } | { error: 'unknown' | 'invalid' }
-const filters: readonly string[] = ['dotnet', 'go', 'cloud', 'mobile', 'python']
+const filters: readonly string[] = ['dotnet', 'node', 'go', 'cloud', 'mobile', 'python']
 export function parseCommand(input: string): ParsedCommand {
   const parts = input.trim().toLowerCase().split(/\s+/)
   const command = parts[0] ?? ''

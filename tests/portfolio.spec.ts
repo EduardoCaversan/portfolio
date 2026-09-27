@@ -32,9 +32,9 @@ test('base path, links, assets and responsive layout', async ({ page }) => {
         ),
     )
   expect(invalid).toEqual([])
-  await expect(page.getByRole('link', { name: /Ver código: TaskFlow/ })).toHaveAttribute(
+  await expect(page.getByRole('link', { name: /Ver repositório: IncidentHub/ })).toHaveAttribute(
     'href',
-    /\/tree\/entrega-3$/,
+    /\/incident-hub$/,
   )
   await page.goto('./#infrastructure')
   await page.reload()
@@ -56,7 +56,7 @@ test('language, theme and density persist across refresh', async ({ page }, test
   )
   expect(
     await page
-      .locator('details')
+      .locator('.technical-details')
       .evaluateAll((items) => items.every((item) => item.hasAttribute('open'))),
   ).toBe(true)
   await expect(page.getByText('Software Engineer Pleno — SustainOps')).toBeVisible()
@@ -82,7 +82,7 @@ test('keyboard navigation, command palette focus and actions', async ({ page }) 
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
   await page.keyboard.press('Meta+k')
   await expect(dialog).toBeVisible()
-  await dialog.getByRole('textbox').fill('infra')
+  await dialog.getByRole('textbox').fill('laboratorio')
   await page.keyboard.press('Enter')
   await expect(page).toHaveURL(/#infrastructure$/)
   await page.keyboard.press('Control+k')

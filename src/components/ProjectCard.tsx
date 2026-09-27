@@ -1,7 +1,8 @@
-import { ArrowRight, ArrowUpRight, ChevronDown, GitBranch } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, ChevronDown } from 'lucide-react'
 import { content } from '../data/content'
 import type { Locale, Mode, Project } from '../data/types'
 import { ExternalLink } from './ExternalLink'
+import { ProjectArchitecture } from './ProjectArchitecture'
 
 export function ProjectFlow({ project }: { project: Project }) {
   return (
@@ -15,7 +16,55 @@ export function ProjectFlow({ project }: { project: Project }) {
     </ol>
   )
 }
+
+function LayerVisual({ label, steps, note }: { label: string; steps: string[]; note: string }) {
+  return (
+    <div className="layer-visual">
+      <span className="mono code-green">{label}</span>
+      <div className="layer-stack">
+        {steps.map((step) => (
+          <span key={step}>{step}</span>
+        ))}
+      </div>
+      <span className="visual-note">{note}</span>
+    </div>
+  )
+}
+
 function ProjectVisual({ id }: { id: string }) {
+  if (id === 'incident-hub')
+    return (
+      <LayerVisual
+        label="INCIDENT LIFECYCLE API"
+        steps={['HTTP client', 'Express + auth', 'service + repository', 'MongoDB']}
+        note="VALIDATE → AUTHORIZE → PERSIST → OBSERVE"
+      />
+    )
+  if (id === 'ekklesia')
+    return (
+      <div className="window-visual">
+        <div className="window-node">
+          CONTROL
+          <br />
+          <small>preview · live</small>
+        </div>
+        <i aria-hidden="true" />
+        <div className="window-node">
+          DISPLAY
+          <br />
+          <small>projection</small>
+        </div>
+        <span className="visual-note">BROADCASTCHANNEL / STORAGE FALLBACK</span>
+      </div>
+    )
+  if (id === 'webchat')
+    return (
+      <LayerVisual
+        label="DIRECT MESSAGE FLOW"
+        steps={['React client', 'Firebase Auth', 'Firestore rules', 'atomic write + snapshot']}
+        note="IDENTITY → RULES → REALTIME STATE"
+      />
+    )
   if (id === 'bankapp')
     return (
       <div className="code-visual">
@@ -30,27 +79,6 @@ function ProjectVisual({ id }: { id: string }) {
         </div>
         <div>{'}'}</div>
         <span className="visual-note">DOMAIN → APPLICATION → INFRASTRUCTURE</span>
-      </div>
-    )
-  if (id === 'dotnet-easy')
-    return (
-      <div className="code-visual">
-        <div>
-          <span className="code-green">❯</span> python dotnet_easy.py
-        </div>
-        <div className="cli-line">
-          <span>Architecture</span>
-          <b>Clean Architecture</b>
-        </div>
-        <div className="cli-line">
-          <span>Database</span>
-          <b>PostgreSQL</b>
-        </div>
-        <div className="cli-line">
-          <span>Delivery</span>
-          <b>Docker + GitHub Actions</b>
-        </div>
-        <span className="visual-note">CONFIGURE → GENERATE → BUILD</span>
       </div>
     )
   if (id === 'mini-k6')
@@ -70,23 +98,14 @@ function ProjectVisual({ id }: { id: string }) {
       </div>
     )
   return (
-    <div className="mobile-architecture">
-      <div className="android-symbol">
-        <span />
-        <span />
-        <span />
-      </div>
-      <div>
-        <span className="mono code-green">OFFLINE FIRST</span>
-        <div className="mobile-layers">
-          <span>Java / Material 3</span>
-          <span>Repository / Room</span>
-          <span>SQLite</span>
-        </div>
-      </div>
-    </div>
+    <LayerVisual
+      label="INFRASTRUCTURE AS CODE"
+      steps={['Terraform', 'Droplet + firewall', 'cloud-init + Docker', 'Asterisk / PJSIP']}
+      note="PROVISION → BOOTSTRAP → RUN"
+    />
   )
 }
+
 export function ProjectCard({
   project,
   locale,
@@ -115,12 +134,6 @@ export function ProjectCard({
       <div className="project-content">
         <div className="project-category">
           <span>{project.status}</span>
-          {project.branch && (
-            <span>
-              <GitBranch size={12} />
-              {project.branch}
-            </span>
-          )}
         </div>
         <h3>
           {project.name}
@@ -144,7 +157,23 @@ export function ProjectCard({
                 <li key={item.en}>{item[locale]}</li>
               ))}
             </ul>
-            {project.flow.length > 0 && <ProjectFlow project={project} />}
+            {project.story && (
+              <dl className="project-story">
+                <div>
+                  <dt>{t.problem}</dt>
+                  <dd>{project.story.problem[locale]}</dd>
+                </div>
+                <div>
+                  <dt>{t.engineering}</dt>
+                  <dd>{project.story.engineering[locale]}</dd>
+                </div>
+                <div>
+                  <dt>{t.result}</dt>
+                  <dd>{project.story.result[locale]}</dd>
+                </div>
+              </dl>
+            )}
+            <ProjectArchitecture project={project} locale={locale} />
           </div>
         </details>
         <div className="project-links">
@@ -152,9 +181,10 @@ export function ProjectCard({
             <ExternalLink
               key={link.url}
               href={link.url}
-              aria-label={`${t.viewCode}: ${link.label}`}
+              aria-label={`${link.kind === 'demo' ? link.label : t.viewCode}: ${project.name}`}
+              className={link.kind === 'demo' ? 'project-demo-link' : undefined}
             >
-              {project.links.length > 1 ? link.label : t.viewCode}
+              {link.label}
               <ArrowUpRight size={15} />
             </ExternalLink>
           ))}
